@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class=" " style="min-height: 600px;">
+    <div class="text-center">
+    </div>
+    <div class="row">
+      
+        <div class="col-md-12">
+            <div class="text-center" style="max-width: 300px; margin: 0 auto; margin-top: 100px;">
+                <img src="~/images/viseon-logo-300x100.png" />
+                <form action="@Url.Content("~/Result/Overview")">
+                    <div class="input-group">
+                        <input class="form-control" name="target" id="target" placeholder="Input the URL to view...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default"  ><i class="glyphicon glyphicon-search"></i></button>
+                        </span>
+                    </div><!-- /input-group -->
+                </form>
+
+            </div>
+        </div><!-- /.col-lg-6 -->
+    </div><!-- /.row -->
+</div>

@@ -1,0 +1,203 @@
+﻿@model Viseon.Apps.MvcClient.ViewModels.Result.ResultViewModel
+@{
+    ViewBag.Title = "Overview";
+}
+<div class="row">
+    <div class="col-md-12">
+            <img src="@Url.Content("~/images/viseon-logo-300x100.png")" />
+       
+        <h3>Viewing : <a href="@Model.OnPage.PageUrl">@Model.OnPage.PageUrl</a> </h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8">
+        <!-- Meta -->
+        <div class="panel panel-default"id="meta">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <a href="#metaBody" class="btn pull-right" data-toggle="collapse"><i class="glyphicon glyphicon-minus"></i> / <i class="glyphicon glyphicon-plus"></i></a>
+                    <h1>Meta Content </h1>
+                </div>
+            </div>
+            <div class="panel-body collapse" id="metaBody" >
+                <h2>Title: 
+                </h2>
+                @Model.OnPage.Title.Text
+                <small>
+                    Word Count: <span class="label label-danger"> @Model.OnPage.Title.WordCount </span>  Character Count : <span class="label label-info"> @Model.OnPage.Title.CharacterCount</span>
+                </small>
+                <hr/>
+                <h2>Description: </h2>
+                
+                @Model.OnPage.Description.Text
+                <small>
+                    Word Count: <span class="label label-danger"> @Model.OnPage.Description.WordCount </span>  Character Count : <span class="label label-info"> @Model.OnPage.Description.CharacterCount</span>
+                </small>
+                <hr/>
+                <h2>Keywords: 
+                   
+                </h2>
+                @Model.OnPage.Keywords.Text
+                <small>
+                    Word Count: <span class="label label-danger"> @Model.OnPage.Keywords.WordCount </span>  Character Count : <span class="label label-info"> @Model.OnPage.Keywords.CharacterCount</span>
+                </small>    
+            </div>
+        </div>
+        <!-- Meta -->
+        <!-- Headers -->
+        
+        <div class="panel panel-default" id="headers">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <a href="#headersBody" class="btn pull-right" data-toggle="collapse"><i class="glyphicon glyphicon-minus"></i> / <i class="glyphicon glyphicon-plus"></i></a>
+
+                    <h1>Headers (@Model.OnPage.TotalHeaders)</h1>
+                </div>
+            </div>
+            <div class="panel-body collapse" id="headersBody">
+                @{
+                    var tags = Model.OnPage.Headers.Select(x => x.HtmlTagName).Distinct().ToList();
+                    foreach (var tag in tags)
+                    {
+                        <h1>@tag (@Model.OnPage.Headers.Count(x => x.HtmlTagName == tag))</h1>
+                        foreach (var header in Model.OnPage.Headers.Where(x => x.HtmlTagName == tag).ToList())
+                        {
+                            <h2>@header.Text </h2>
+                        }
+                        <hr/>
+                    }
+                }
+
+            </div>
+        </div>
+        <!-- .Headers-->
+        
+        <!-- Para -->
+        <div class="panel panel-default" id="paras">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <a href="#parasBody" class="btn pull-right" data-toggle="collapse"><i class="glyphicon glyphicon-minus"></i> / <i class="glyphicon glyphicon-plus"></i></a>
+
+                    <h1>Paragraphs (@Model.OnPage.TotalParas)</h1>
+                </div>
+            </div>
+            <div class="panel-body collapse" id="parasBody">
+                @foreach (var para in Model.OnPage.Paras)
+                {
+                    <p>@para.Text
+                        <span class="label label-danger">Word Count: @para.WordCount</span>    
+                    </p>
+                }
+            </div>
+        </div>
+        <!-- .Para-->
+        
+        <!-- Images -->
+        <div class="panel panel-default" id="images">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <a href="#imagesBody" class="btn pull-right" data-toggle="collapse"><i class="glyphicon glyphicon-minus"></i> / <i class="glyphicon glyphicon-plus"></i></a>
+
+                    <h1>Images (@Model.OnPage.TotalImages)</h1>
+                </div>
+            </div>
+            <div class="panel-body collapse" id="imagesBody">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>Alt</th>
+                        <th>Title</th>
+                        <th>Url</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var img in Model.OnPage.Images)
+                    {
+                        <tr>
+                            <td>@img.Alt</td>
+                            <td>@img.Title</td>
+                            <td>@img.Url</td>
+                            <td  class="thumbnail"><img src="@img.Url" /></td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- Images -->
+        <!-- Links -->
+        <div class="panel panel-default" id="links">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <a href="#linksBody" class="btn pull-right" data-toggle="collapse"><i class="glyphicon glyphicon-minus"></i> / <i class="glyphicon glyphicon-plus"></i></a>
+
+                    <h1>Links (@Model.OnPage.TotalLinks)</h1>
+                </div>
+            </div>
+            <div class="panel-body collapse" id="linksBody">
+                <table class="table table-bordered table-striped table-responsive">
+                    <thead>
+                    <tr>
+                        <th>Anchor Text</th>
+                        <th>Href</th>
+                        <th>Direction</th>
+                        <th>Follow</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var link in Model.OnPage.Links)
+                    {
+                        <tr>
+                            <td style="max-width: 150px; word-wrap: break-word;">@link.AnchorText</td>
+                            <td style="max-width: 150px; word-wrap: break-word;">@link.Href</td>
+                            <td>@(link.IsInternal ? "Internal":"External")</td>
+                            <td>@(link.IsFollow ? "Follow" : "NoFollow")</td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- Links -->
+
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <h2>Nav</h2>
+                </div>
+            </div>
+            <div class="panel-body">
+                <ul class="list-unstyled">
+                    <li><a href="#meta">Meta Content</a></li>
+                    <li><a href="#headers">Headers</a></li>
+                    <li><a href="#paras">Paragraphs</a></li>
+                    <li><a href="#images">Images</a></li>
+                    <li><a href="#links">Links</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <h2>INSIGHTS <i clas="glypicon glyphicon-search"></i>
+                    </h2>
+                </div>
+            </div>
+            <div class="panel-body">
+                <h2>Content Word Count : @Model.OnPage.ContentWordCount</h2>
+                <hr/>
+                <h2>Links (@Model.OnPage.TotalLinks)</h2>
+                <h3>Do Follow : @Model.OnPage.TotalDoFollowLinks</h3>
+                <h3>No Follow : @Model.OnPage.TotalNoFollowLinks</h3>
+                <h3>Internal : @Model.OnPage.TotalInternalLinks</h3>
+                <h3>External: @Model.OnPage.TotalExternalLinks</h3>
+                <hr/>
+                <h2>Images (@Model.OnPage.TotalImages)</h2>
+            </div>
+        </div>
+    </div>
+</div>
+ 
