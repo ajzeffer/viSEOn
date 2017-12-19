@@ -47,6 +47,7 @@
     <Compile Include="Class1.cs" />
     <Compile Include="ExtensionMethods\HtmlExtensionMethods.cs" />
     <Compile Include="Logic\OnPage\BuildOnPageModel.cs" />
+    <Compile Include="Logic\OnPage\GetContentHtml.cs" />
     <Compile Include="Logic\OnPage\GetElements.cs" />
     <Compile Include="Logic\OnPage\OnPageLogic.cs" />
     <Compile Include="Logic\RestClient\GetWebPage.cs" />

@@ -10,18 +10,16 @@ namespace Viseon.Core.BusinessLayer.Logic.ViseonElements
 {
     public class BacklinkLogic : IViseonElements<ViseonBacklinkModel>
     {
-        private string sourceUrl;
-        public BacklinkLogic(string SourceUrl)
+        private readonly string _sourceUrl;
+        public BacklinkLogic(string sourceUrl)
         {
-            sourceUrl = SourceUrl; 
+            this._sourceUrl = sourceUrl; 
         }
         public List<ViseonBacklinkModel> GetViseonElements(HtmlDocument doc)
         {
             var links = doc.DocumentNode.GetElementsByName(ViseonStaticData.LinkElement);
 
             var result = new List<ViseonBacklinkModel>();
-            var sourceUri = new Uri(sourceUrl);
-            var domain = sourceUri.Host;
             foreach (var htmlNode in links)
             {
                 var href = htmlNode.GetAttributeValue(ViseonStaticData.HtmlProps.Link.Href,""); 
@@ -31,13 +29,34 @@ namespace Viseon.Core.BusinessLayer.Logic.ViseonElements
                     AnchorText = htmlNode.InnerText,
                     Href = href,
                     IsFollow = htmlNode.GetAttributeValue(ViseonStaticData.HtmlProps.Link.Rel.Name,ViseonStaticData.HtmlProps.Link.Rel.Follow) == ViseonStaticData.HtmlProps.Link.Rel.Follow,
-                    IsInternal = href.Contains(domain)
+                    IsInternal = CheckIsInternal(_sourceUrl,href)
                 });
                 
             }
             return result; 
         }
+        /// <summary>
+        /// Checks to see if the destination URL is internal or external
+        /// Handles relative urls by trying to create URI object
+        /// </summary>
+        /// <param name="sourceUrl"></param>
+        /// <param name="destUrl"></param>
+        /// <returns></returns>
+        private static bool CheckIsInternal(string sourceUrl, string destUrl)
+        {
+            try
+            {
+                var uri = new Uri(destUrl);
+                var sourceUri = new Uri(sourceUrl);
+                var domain = sourceUri.Host;
+                return destUrl.Contains(domain); 
 
-        
+            }
+            catch (Exception e)
+            {
+
+                return true; 
+            }
+        }
     }
 }

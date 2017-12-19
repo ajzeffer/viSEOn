@@ -24,7 +24,7 @@ namespace Viseon.Core.BusinessLayer.Logic.ViseonElements
                         {
                             HtmlTagName = item.Name,
                             Text = item.InnerText,
-                            WordCount = WordCounting.CountWords(item.InnerText)
+                            WordCount = WordCounting.CountWords(item.InnerText), 
 
                         });
 

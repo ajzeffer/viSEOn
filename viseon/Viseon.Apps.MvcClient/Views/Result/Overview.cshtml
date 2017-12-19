@@ -4,200 +4,410 @@
 }
 <div class="row">
     <div class="col-md-12">
-            <img src="@Url.Content("~/images/viseon-logo-300x100.png")" />
+           
        
-        <h3>Viewing : <a href="@Model.OnPage.PageUrl">@Model.OnPage.PageUrl</a> </h3>
+       
+        <div class="u-mv-large u-text-center">
+            <h2 class="u-mb-xsmall">  Viewing : <a target="_blank" href="@Model.OnPage.PageUrl">@Model.OnPage.PageUrl <i class="fa fa-share"></i></a></h2>
+            <p class="u-text-mute u-h6">You can use the search box located at the top of the page to pull up another page or <a href="@Url.Content("~/")">go back to the home page</a></p>
+        </div>
     </div>
 </div>
 <div class="row">
-    <div class="col-md-8">
-        <!-- Meta -->
-        <div class="panel panel-default"id="meta">
-            <div class="panel-heading">
-                <div class="panel-title">
-                    <a href="#metaBody" class="btn pull-right" data-toggle="collapse"><i class="glyphicon glyphicon-minus"></i> / <i class="glyphicon glyphicon-plus"></i></a>
-                    <h1>Meta Content </h1>
-                </div>
-            </div>
-            <div class="panel-body collapse" id="metaBody" >
-                <h2>Title: 
-                </h2>
-                @Model.OnPage.Title.Text
-                <small>
-                    Word Count: <span class="label label-danger"> @Model.OnPage.Title.WordCount </span>  Character Count : <span class="label label-info"> @Model.OnPage.Title.CharacterCount</span>
-                </small>
-                <hr/>
-                <h2>Description: </h2>
-                
-                @Model.OnPage.Description.Text
-                <small>
-                    Word Count: <span class="label label-danger"> @Model.OnPage.Description.WordCount </span>  Character Count : <span class="label label-info"> @Model.OnPage.Description.CharacterCount</span>
-                </small>
-                <hr/>
-                <h2>Keywords: 
+<div class="col-md-9">
+    <!-- Meta -->
+    <h1>Meta Content </h1>
+    <div class="c-card u-p-medium"id="meta">
+        <div class="panel-heading">
+            <div class="panel-title">
                    
-                </h2>
-                @Model.OnPage.Keywords.Text
-                <small>
-                    Word Count: <span class="label label-danger"> @Model.OnPage.Keywords.WordCount </span>  Character Count : <span class="label label-info"> @Model.OnPage.Keywords.CharacterCount</span>
-                </small>    
             </div>
         </div>
-        <!-- Meta -->
-        <!-- Headers -->
-        
-        <div class="panel panel-default" id="headers">
-            <div class="panel-heading">
-                <div class="panel-title">
-                    <a href="#headersBody" class="btn pull-right" data-toggle="collapse"><i class="glyphicon glyphicon-minus"></i> / <i class="glyphicon glyphicon-plus"></i></a>
-
-                    <h1>Headers (@Model.OnPage.TotalHeaders)</h1>
+        <div class="panel-body collapse" id="metaBody">
+             
+            <div class="c-post">
+                <textarea class="c-post__content">@Html.Raw(Model.OnPage.Title.Text)</textarea>
+                <div class="c-post__toolbar">
+                    <span class="c-post__time" href="#">Title:    Word Count @Model.OnPage.Title.WordCount | Character Count : @Model.OnPage.Title.CharacterCount
+                    </span>
                 </div>
             </div>
-            <div class="panel-body collapse" id="headersBody">
-                @{
-                    var tags = Model.OnPage.Headers.Select(x => x.HtmlTagName).Distinct().ToList();
-                    foreach (var tag in tags)
-                    {
-                        <h1>@tag (@Model.OnPage.Headers.Count(x => x.HtmlTagName == tag))</h1>
-                        foreach (var header in Model.OnPage.Headers.Where(x => x.HtmlTagName == tag).ToList())
-                        {
-                            <h2>@header.Text </h2>
-                        }
-                        <hr/>
-                    }
-                }
 
+            <div class="c-post">
+                <textarea class="c-post__content">@Html.Raw(Model.OnPage.Description.Text)</textarea>
+                <div class="c-post__toolbar">
+                    <span class="c-post__time" href="#">Description:   Word Count @Model.OnPage.Description.WordCount | Character Count : @Model.OnPage.Description.CharacterCount
+                    </span>
+                </div>
+            </div>
+
+            <div class="c-post">
+                <textarea class="c-post__content">@Html.Raw(Model.OnPage.Keywords.Text)</textarea>
+                <div class="c-post__toolbar">
+                    <span class="c-post__time" href="#">
+                      Keywords:   Word Count @Model.OnPage.Keywords.WordCount | Character Count : @Model.OnPage.Keywords.CharacterCount
+                    </span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Meta -->
+    <!-- Content View -->
+    <h1 class="c-tooltip c-tooltip--top" aria-label="Content View grabs all of the Content Html from the page and their nested elements.">
+        Content View  
+
+    </h1>
+    <div class="c-card u-p-medium" id="contentView">
+        <span class="pull-right c-badge c-badge--success">Words > @Model.OnPage.ContentWordCount</span>
+        <div class="panel-body collapse" id="headersBody">
+            @foreach (var element in Model.OnPage.HtmlContentElements)
+            {
+                @Html.Raw(element)
+            }
+        </div>
+    </div>
+    <!-- .Content View-->
+
+    <!-- Headers -->
+    <h1>Headers (@Model.OnPage.TotalHeaders)</h1>
+    <div class="c-card u-p-medium" id="headers">
+        <div class="panel-heading">
+            <div class="panel-title">
+                <a href="#headersBody" class="btn pull-right" data-toggle="collapse"><i class="glyphicon glyphicon-minus"></i> / <i class="glyphicon glyphicon-plus"></i></a>
+
+                    
             </div>
         </div>
-        <!-- .Headers-->
-        
-        <!-- Para -->
-        <div class="panel panel-default" id="paras">
-            <div class="panel-heading">
-                <div class="panel-title">
-                    <a href="#parasBody" class="btn pull-right" data-toggle="collapse"><i class="glyphicon glyphicon-minus"></i> / <i class="glyphicon glyphicon-plus"></i></a>
-
-                    <h1>Paragraphs (@Model.OnPage.TotalParas)</h1>
-                </div>
-            </div>
-            <div class="panel-body collapse" id="parasBody">
-                @foreach (var para in Model.OnPage.Paras)
+        <div class="panel-body collapse" id="headersBody">
+            @{
+                var tags = Model.OnPage.Headers.Select(x => x.HtmlTagName).Distinct().ToList();
+                foreach (var tag in tags)
                 {
-                    <p>@para.Text
-                        <span class="label label-danger">Word Count: @para.WordCount</span>    
-                    </p>
+                    <h1>@tag (@Model.OnPage.Headers.Count(x => x.HtmlTagName == tag))</h1>
+                   
+                    
+                    foreach (var header in Model.OnPage.Headers.Where(x => x.HtmlTagName == tag).ToList())
+                    {
+                        <div class="c-post">
+                            <textarea class="c-post__content">@Html.Raw(header.Text)</textarea>
+
+                            <div class="c-post__toolbar">
+                                <span>@header.HtmlTagName</span>
+                                <span class="c-post__time" href="#">Word Count @header.WordCount  
+                                </span>
+                            </div>
+                        </div>
+                    }
+                    <hr/>
                 }
-            </div>
+            }
+
         </div>
-        <!-- .Para-->
+    </div>
+    <!-- .Headers-->
         
-        <!-- Images -->
-        <div class="panel panel-default" id="images">
-            <div class="panel-heading">
-                <div class="panel-title">
-                    <a href="#imagesBody" class="btn pull-right" data-toggle="collapse"><i class="glyphicon glyphicon-minus"></i> / <i class="glyphicon glyphicon-plus"></i></a>
+    <!-- Para -->
 
-                    <h1>Images (@Model.OnPage.TotalImages)</h1>
-                </div>
-            </div>
-            <div class="panel-body collapse" id="imagesBody">
-                <table class="table table-bordered table-striped">
-                    <thead>
-                    <tr>
-                        <th>Alt</th>
-                        <th>Title</th>
-                        <th>Url</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach (var img in Model.OnPage.Images)
-                    {
-                        <tr>
-                            <td>@img.Alt</td>
-                            <td>@img.Title</td>
-                            <td>@img.Url</td>
-                            <td  class="thumbnail"><img src="@img.Url" /></td>
-                        </tr>
-                    }
-                    </tbody>
-                </table>
-            </div>
+    <h1>Paragraphs (@Model.OnPage.TotalParas)</h1>
+    <div class="c-card u-p-medium" id="paras">
+        <span class="pull-right c-badge c-badge--success">Words > @Model.OnPage.Paras.Sum(x => x.WordCount)</span>
+        
+        <div class="panel-body collapse" id="parasBody">
+            @foreach (var para in Model.OnPage.Paras)
+            {
+                <p tile="Word Count :  @para.WordCount">
+                    @Html.Raw(para.Text)
+                </p>
+            }
         </div>
-        <!-- Images -->
-        <!-- Links -->
-        <div class="panel panel-default" id="links">
-            <div class="panel-heading">
-                <div class="panel-title">
-                    <a href="#linksBody" class="btn pull-right" data-toggle="collapse"><i class="glyphicon glyphicon-minus"></i> / <i class="glyphicon glyphicon-plus"></i></a>
+    </div>
+    <!-- .Para-->
+        
+     
+</div>
+<div class="col-md-3">
+<!-- Nav -->
+<div class="c-graph-card">
+    <div class="c-graph-card__content u-flex u-justify-between u-align-items-baseline">
+        <h3 class="c-graph-card__title u-h4">Nav</h3>
+        <div class="u-text-right">
 
-                    <h1>Links (@Model.OnPage.TotalLinks)</h1>
-                </div>
-            </div>
-            <div class="panel-body collapse" id="linksBody">
-                <table class="table table-bordered table-striped table-responsive">
-                    <thead>
-                    <tr>
-                        <th>Anchor Text</th>
-                        <th>Href</th>
-                        <th>Direction</th>
-                        <th>Follow</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach (var link in Model.OnPage.Links)
-                    {
-                        <tr>
-                            <td style="max-width: 150px; word-wrap: break-word;">@link.AnchorText</td>
-                            <td style="max-width: 150px; word-wrap: break-word;">@link.Href</td>
-                            <td>@(link.IsInternal ? "Internal":"External")</td>
-                            <td>@(link.IsFollow ? "Follow" : "NoFollow")</td>
-                        </tr>
-                    }
-                    </tbody>
-                </table>
-            </div>
         </div>
-        <!-- Links -->
+    </div>
+    <div class="c-graph-card__footer u-ph-zero">
+        <!-- Nav Item -->
+        <div class="u-flex u-justify-between u-align-items-center u-border-bottom u-ph-medium u-pb-small">
+            <span class="u-text-small u-color-primary">
+                <i class="fa fa-circle-o u-text-small u-mr-xsmall u-color-info"></i>
+                <a href="#meta">Meta Content</a>
+            </span>
+
+        </div>
+        <!-- .Nav Item -->
+        <!-- Nav Item -->
+        <div class="u-flex u-justify-between u-align-items-center u-border-bottom u-ph-medium u-pb-small">
+            <span class="u-text-small u-color-primary">
+                <i class="fa fa-circle-o u-text-small u-mr-xsmall u-color-info"></i>
+                <a href="#contentView">Conent View</a>
+            </span>
+
+        </div>
+        <!-- .Nav Item -->
+        <!-- Nav Item -->
+        <div class="u-flex u-justify-between u-align-items-center u-border-bottom u-ph-medium u-pb-small">
+            <span class="u-text-small u-color-primary">
+                <i class="fa fa-circle-o u-text-small u-mr-xsmall u-color-info"></i>
+                <a href="#headers">Headers</a>
+            </span>
+
+        </div>
+        <!-- .Nav Item -->
+        <!-- Nav Item -->
+        <div class="u-flex u-justify-between u-align-items-center u-border-bottom u-ph-medium u-pb-small">
+            <span class="u-text-small u-color-primary">
+                <i class="fa fa-circle-o u-text-small u-mr-xsmall u-color-info"></i>
+                <a href="#paras">Paragraphs</a>
+            </span>
+
+        </div>
+        <!-- .Nav Item -->
+        <!-- Nav Item -->
+        <div class="u-flex u-justify-between u-align-items-center u-border-bottom u-ph-medium u-pb-small">
+            <span class="u-text-small u-color-primary">
+                <i class="fa fa-circle-o u-text-small u-mr-xsmall u-color-info"></i>
+                <a href="#images">Images</a>
+            </span>
+
+        </div>
+        <!-- .Nav Item -->
+        <!-- Nav Item -->
+        <div class="u-flex u-justify-between u-align-items-center u-border-bottom u-ph-medium u-pb-small">
+            <span class="u-text-small u-color-primary">
+                <i class="fa fa-circle-o u-text-small u-mr-xsmall u-color-info"></i>
+                <a href="#links">Links</a>
+            </span>
+
+        </div>
+        <!-- .Nav Item -->
 
     </div>
-    <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <div class="panel-title">
-                    <h2>Nav</h2>
-                </div>
-            </div>
-            <div class="panel-body">
-                <ul class="list-unstyled">
-                    <li><a href="#meta">Meta Content</a></li>
-                    <li><a href="#headers">Headers</a></li>
-                    <li><a href="#paras">Paragraphs</a></li>
-                    <li><a href="#images">Images</a></li>
-                    <li><a href="#links">Links</a></li>
-                </ul>
+</div>
+
+
+<!--.Nav -->
+<!-- Insights -->
+<!-- Content -->
+<div class="c-graph-card">
+    <div class="c-graph-card__content u-flex u-justify-between u-align-items-baseline">
+        <h3 class="c-graph-card__title u-h4">Content</h3>
+        <div class="u-text-right">
+
+        </div>
+    </div>
+    <div class="c-graph-card__footer u-ph-zero">
+        <div class="u-flex u-justify-between u-align-items-center u-border-bottom u-ph-medium u-pb-small">
+
+            <span class="u-text-small u-color-primary">
+                <i class="fa fa-circle-o u-text-small u-mr-xsmall u-color-info"></i> Word Count
+            </span>
+
+            <div class="u-text-right u-color-primary">
+                @Model.OnPage.ContentWordCount <i class="glyphicon glyphicon-book"></i>
             </div>
         </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <div class="panel-title">
-                    <h2>INSIGHTS <i clas="glypicon glyphicon-search"></i>
-                    </h2>
+        @{
+            var hTags = Model.OnPage.Headers.Select(x => x.HtmlTagName).Distinct().ToList();
+            foreach (var tag in tags)
+            {
+                <div class="u-flex u-justify-between u-align-items-center u-border-bottom u-ph-medium u-pv-small">
+
+                    <span class="u-text-small u-color-primary">
+                        <i class="fa fa-circle-o u-text-small u-mr-xsmall u-color-primary"></i> @tag
+                    </span>
+
+                    <div class="u-text-right u-color-primary">
+                        @Model.OnPage.Headers.Count(x => x.HtmlTagName == tag)
+                    </div>
                 </div>
-            </div>
-            <div class="panel-body">
-                <h2>Content Word Count : @Model.OnPage.ContentWordCount</h2>
-                <hr/>
-                <h2>Links (@Model.OnPage.TotalLinks)</h2>
-                <h3>Do Follow : @Model.OnPage.TotalDoFollowLinks</h3>
-                <h3>No Follow : @Model.OnPage.TotalNoFollowLinks</h3>
-                <h3>Internal : @Model.OnPage.TotalInternalLinks</h3>
-                <h3>External: @Model.OnPage.TotalExternalLinks</h3>
-                <hr/>
-                <h2>Images (@Model.OnPage.TotalImages)</h2>
+
+
+            }
+        }
+        <div class="u-flex u-justify-between u-align-items-center u-border-bottom u-ph-medium u-pv-small">
+
+            <span class="u-text-small u-color-primary">
+                <i class="fa fa-circle-o u-text-small u-mr-xsmall u-color-primary"></i> Paragraphs
+            </span>
+
+            <div class="u-text-right u-color-primary">
+                @Model.OnPage.TotalParas
             </div>
         </div>
+
+    </div>
+
+</div>
+<!-- .Content -->
+<!-- Links -->
+<div class="c-graph-card">
+    <div class="c-graph-card__content u-flex u-justify-between u-align-items-baseline">
+        <h3 class="c-graph-card__title u-h4">Links</h3>
+        <div class="u-text-right">
+
+        </div>
+    </div>
+    <div class="c-graph-card__footer u-ph-zero">
+        <div class="u-flex u-justify-between u-align-items-center u-border-bottom u-ph-medium u-pb-small">
+
+            <span class="u-text-small u-color-primary">
+                <i class="fa fa-circle-o u-text-small u-mr-xsmall u-color-info"></i>Total Links
+            </span>
+
+            <div class="u-text-right u-color-primary">
+                @Model.OnPage.TotalLinks <i class="glyphicon glyphicon-link"></i>
+            </div>
+        </div>
+        <div class="u-flex u-justify-between u-align-items-center u-border-bottom u-ph-medium u-pb-small">
+
+            <span class="u-text-small u-color-primary">
+                <i class="fa fa-circle-o u-text-small u-mr-xsmall u-color-info"></i>Do Follow
+            </span>
+
+            <div class="u-text-right u-color-primary">
+                @Model.OnPage.TotalDoFollowLinks <i class="glyphicon glyphicon-link"></i>
+            </div>
+        </div>
+
+        <div class="u-flex u-justify-between u-align-items-center u-border-bottom u-ph-medium u-pb-small">
+
+            <span class="u-text-small u-color-primary">
+                <i class="fa fa-circle-o u-text-small u-mr-xsmall u-color-info"></i>No Follow
+            </span>
+
+            <div class="u-text-right u-color-primary">
+                @Model.OnPage.TotalNoFollowLinks <i class="glyphicon glyphicon-link"></i>
+            </div>
+        </div>
+
+        <div class="u-flex u-justify-between u-align-items-center u-border-bottom u-ph-medium u-pb-small">
+
+            <span class="u-text-small u-color-primary">
+                <i class="fa fa-circle-o u-text-small u-mr-xsmall u-color-info"></i>Internal
+            </span>
+
+            <div class="u-text-right u-color-primary">
+                @Model.OnPage.TotalInternalLinks <i class="glyphicon glyphicon-link"></i>
+            </div>
+        </div>
+
+        <div class="u-flex u-justify-between u-align-items-center u-border-bottom u-ph-medium u-pb-small">
+
+            <span class="u-text-small u-color-primary">
+                <i class="fa fa-circle-o u-text-small u-mr-xsmall u-color-info"></i>External
+            </span>
+
+            <div class="u-text-right u-color-primary">
+                @Model.OnPage.TotalExternalLinks <i class="glyphicon glyphicon-link"></i>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!--.Links-->
+<!-- IMages -->
+<div class="c-graph-card">
+    <div class="c-graph-card__content u-flex u-justify-between u-align-items-baseline">
+        <h3 class="c-graph-card__title u-h4">Images</h3>
+        <div class="u-text-right">
+
+        </div>
+    </div>
+    <div class="c-graph-card__footer u-ph-zero">
+        <div class="u-flex u-justify-between u-align-items-center u-border-bottom u-ph-medium u-pb-small">
+
+            <span class="u-text-small u-color-primary">
+                <i class="fa fa-circle-o u-text-small u-mr-xsmall u-color-info"></i> Total Images
+            </span>
+
+            <div class="u-text-right u-color-primary">
+                @Model.OnPage.TotalImages<i class="glyphicon glyphicon-picture"></i>
+            </div>
+        </div>
+               
+    </div>
+
+</div>
+
+<!-- IMages -->
+<!--.Insights-->
+</div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <!-- Images -->
+        <h1>Images </h1>
+                <table class="c-table" id="images">
+                    <caption class="c-table__title">
+                        Images<small>@Model.OnPage.TotalImages</small>
+                    </caption>
+                    <thead class="c-table__head c-table__head--slim">
+                        <tr class="c-table__row">
+                            <th class="c-table__cell c-table__cell--head">Alt</th>
+                            <th class="c-table__cell c-table__cell--head">Title</th>
+                            <th class="c-table__cell c-table__cell--head">Url</th>
+                            <th class="c-table__cell c-table__cell--head">Thumb</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var img in Model.OnPage.Images)
+                    {
+                        <tr class="c-table__row">
+                            <td class="c-table__cell">@img.Alt</td>
+                            <td class="c-table__cell ">@img.Title</td>
+                            <td class="c-table__cell ">@img.Url</td>
+                            <td class="c-table__cell c-table__cell--img o-media">
+                                <div class="o-media__img u-mr-xsmall">
+                                    <img style="width:56px;" src="@img.Url" />
+
+                                </div>
+
+                            </td>
+                        </tr>
+                }
+                    </tbody>
+                </table>
+        <!-- Images -->
+        <!-- Links -->
+        <h1 id="links">Links (@Model.OnPage.TotalLinks)</h1>
+ 
+        <table class="c-table">
+            <caption class="c-table__title">
+                Links <small>@Model.OnPage.TotalLinks </small>
+            </caption>
+            <thead class="c-table__head c-table__head--slim">
+            <tr class="c-table__row">
+                <th class="c-table__cell c-table__cell--head">Anchor Text</th>
+                <th class="c-table__cell c-table__cell--head">Href</th>
+                <th class="c-table__cell c-table__cell--head">Direction</th>
+                <th class="c-table__cell c-table__cell--head">Follow</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var link in Model.OnPage.Links)
+            {
+                <tr class="c-table__row">
+                    <td class="c-table__cell" style="max-width: 150px; word-wrap: break-word;">@link.AnchorText</td>
+                    <td class="c-table__cell" style="max-width: 150px; word-wrap: break-word;">@link.Href</td>
+                    <td class="c-table__cell">@(link.IsInternal ? "Internal" : "External")</td>
+                    <td class="c-table__cell">@(link.IsFollow ? "Follow" : "NoFollow")</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+       
+        <!-- Links -->
+
     </div>
 </div>
  

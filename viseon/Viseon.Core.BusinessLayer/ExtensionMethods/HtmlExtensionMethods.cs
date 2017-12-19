@@ -18,5 +18,11 @@ namespace Viseon.Core.BusinessLayer.ExtensionMethods
         {
             return parent.Descendants().Where(x => x.OriginalName.ToLower() == name.ToLower());
         }
+
+        public static IEnumerable<HtmlNode> GetElementsByTagName(this HtmlNode parent, List<string> names)
+        {
+            names = names.ConvertAll(d => d.ToLower());
+            return parent.Descendants().Where(x => names.Contains(x.OriginalName.ToLower()));
+        }
     }
 }

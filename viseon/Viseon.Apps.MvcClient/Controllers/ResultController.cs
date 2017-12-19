@@ -12,18 +12,26 @@ namespace Viseon.Apps.MvcClient.Controllers
     public class ResultController: Controller
 
     {
+        [HttpGet]
+        public ActionResult Overview()
+        {
+            return Redirect("~/"); 
+        }
+        [HttpPost]
         public async Task<ActionResult> Overview(string target)
         {
             try
             {
                 if (target.IsNullOrWhiteSpace()) return Content("Errrr... no target passed in");
                 var vm = await new ResultViewModelBuilder().BuildResultViewModel(target);
-                if (vm.OnPage.HasError) return Content(string.Join("", vm.OnPage.Messages));
-                return View(vm); 
+                if (!vm.OnPage.HasError) return View(vm);
+                TempData["msg"] = string.Join("", vm.OnPage.Messages);
+                return Redirect("~/");
             }
             catch (Exception e)
             {
-                return Content(e.Message); 
+                TempData["msg"] = e.Message;
+                return Redirect("~/"); 
             }
            
         }

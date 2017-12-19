@@ -23,7 +23,7 @@ namespace Viseon.Core.BusinessLayer.StaticData
         }
         public static List<string> HeaderElements = new     List<string>()
         {
-            "H1","H2","H3","H4","H5"
+            "h1","h2","h3","h4","h5"
         };
         public struct HtmlProps
         {

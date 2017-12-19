@@ -27,5 +27,6 @@ namespace Viseon.Core.Models
         public List<ViseonParagraphModel> Paras { get; set; }
         public List<ViseonImageModel> Images { get; set; }
         public List<ViseonBacklinkModel> Links { get; set; }
+        public List<string> HtmlContentElements { get; set; }
     }
 }

@@ -29,7 +29,8 @@ namespace Viseon.Core.BusinessLayer.Logic.OnPage
                     Headers = new HeaderLogic().GetViseonElements(doc), 
                     Paras = new ParagraphLogic().GetViseonElements(doc), 
                     Images = new ImageLogic().GetViseonElements(doc), 
-                    Links = new BacklinkLogic(url).GetViseonElements(doc)
+                    Links = new BacklinkLogic(url).GetViseonElements(doc),
+                    HtmlContentElements = GetContentHtml(doc)
                 };
                 onPage.ContentWordCount = onPage.Headers.Sum(x => x.WordCount) + onPage.Paras.Sum(x => x.WordCount);
                 onPage.TotalExternalLinks = onPage.Links.Count(x => !x.IsInternal);

@@ -10,5 +10,6 @@ namespace Viseon.Core.Models
      {
         public string Text { get; set; }
         public int WordCount { get; set; }
+        public int Index { get; set; }
     }
 }
