@@ -10,7 +10,7 @@ namespace Viseon.Apps.RestApi.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
+            ViewBag.Title = "See What SEO's want to see!";
 
             return View();
         }

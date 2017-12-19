@@ -22,7 +22,7 @@ namespace Viseon.Apps.MvcClient.Controllers
         {
             try
             {
-                if (target.IsNullOrWhiteSpace()) return Content("Errrr... no target passed in");
+                if (target.IsNullOrWhiteSpace()) throw new Exception("Invalid Url Passed In!"); 
                 var vm = await new ResultViewModelBuilder().BuildResultViewModel(target);
                 if (!vm.OnPage.HasError) return View(vm);
                 TempData["msg"] = string.Join("", vm.OnPage.Messages);
