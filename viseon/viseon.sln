@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viseon.Apps.MvcClient", "Vi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viseon.Apps.MvcClient.Tests", "Viseon.Apps.MvcClient.Tests\Viseon.Apps.MvcClient.Tests.csproj", "{EF73F226-CE2F-4099-98DF-7D3B21F52F5A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viseon.Core.BusinessLayer.Tests", "Viseon.Core.BusinessLayer.Tests\Viseon.Core.BusinessLayer.Tests.csproj", "{D0CF5DBC-EAB5-48FF-B1BF-E1B0D3C3D28A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{EF73F226-CE2F-4099-98DF-7D3B21F52F5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF73F226-CE2F-4099-98DF-7D3B21F52F5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF73F226-CE2F-4099-98DF-7D3B21F52F5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0CF5DBC-EAB5-48FF-B1BF-E1B0D3C3D28A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0CF5DBC-EAB5-48FF-B1BF-E1B0D3C3D28A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0CF5DBC-EAB5-48FF-B1BF-E1B0D3C3D28A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0CF5DBC-EAB5-48FF-B1BF-E1B0D3C3D28A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
