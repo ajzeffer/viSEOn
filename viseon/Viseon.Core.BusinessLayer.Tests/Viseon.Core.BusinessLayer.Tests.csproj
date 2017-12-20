@@ -48,11 +48,26 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Logic\OnPageLogicTests.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Viseon.Core.BusinessLayer\Viseon.Core.BusinessLayer.csproj">
+      <Project>{134c9d49-d66c-4079-ae90-e1f693d58678}</Project>
+      <Name>Viseon.Core.BusinessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Viseon.Core.Contracts\Viseon.Core.Contracts.csproj">
+      <Project>{c9c0c9de-c0f5-4c3f-acb7-748c0686f21c}</Project>
+      <Name>Viseon.Core.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Viseon.Core.Models\Viseon.Core.Models.csproj">
+      <Project>{cd0aefd9-17e8-4be8-9d28-b15d5538080e}</Project>
+      <Name>Viseon.Core.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
