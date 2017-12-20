@@ -70,10 +70,9 @@
 <div class="container">
     @RenderBody()
 </div>
-<footer>
-    <p class="pull-left">&copy; 2017 - @DateTime.Now.Year - ViSEOn.io </p>
-   
-</footer>
+    <div class="navbar navbar-fixed-bottom">
+        &copy; 2017 - @DateTime.Now.Year - ViSEOn.io
+    </div>
     <!-- Main javascsript -->
     <script src="@Url.Content("~/Content/Themes/DashboardUi/js/main.min.js?v=1.4")"></script>
 
