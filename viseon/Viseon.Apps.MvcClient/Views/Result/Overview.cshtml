@@ -16,36 +16,37 @@
 <div class="row">
 <div class="col-md-9">
     <!-- Meta -->
-    <h1>Meta Content </h1>
+ 
     <div class="c-card u-p-medium"id="meta">
-        <div class="panel-heading">
-            <div class="panel-title">
-                   
-            </div>
-        </div>
+        <h1 class="u-text-bold u-border-bottom">Meta Content </h1>
         <div class="panel-body collapse" id="metaBody">
-             
+
             <div class="c-post">
+                <h2>Title: </h2>
                 <textarea class="c-post__content">@Html.Raw(Model.OnPage.Title.Text)</textarea>
                 <div class="c-post__toolbar">
-                    <span class="c-post__time" href="#">Title:    Word Count @Model.OnPage.Title.WordCount | Character Count : @Model.OnPage.Title.CharacterCount
+                    <span class="c-post__time" href="#">
+                        Word Count @Model.OnPage.Title.WordCount | Character Count : @Model.OnPage.Title.CharacterCount
                     </span>
                 </div>
             </div>
 
             <div class="c-post">
+                <h2>Description: </h2>
                 <textarea class="c-post__content">@Html.Raw(Model.OnPage.Description.Text)</textarea>
                 <div class="c-post__toolbar">
-                    <span class="c-post__time" href="#">Description:   Word Count @Model.OnPage.Description.WordCount | Character Count : @Model.OnPage.Description.CharacterCount
+                    <span class="c-post__time" href="#">
+                        Word Count @Model.OnPage.Description.WordCount | Character Count : @Model.OnPage.Description.CharacterCount
                     </span>
                 </div>
             </div>
 
             <div class="c-post">
+                <h2>Keywords: </h2>
                 <textarea class="c-post__content">@Html.Raw(Model.OnPage.Keywords.Text)</textarea>
                 <div class="c-post__toolbar">
                     <span class="c-post__time" href="#">
-                      Keywords:   Word Count @Model.OnPage.Keywords.WordCount | Character Count : @Model.OnPage.Keywords.CharacterCount
+                        Word Count @Model.OnPage.Keywords.WordCount | Character Count : @Model.OnPage.Keywords.CharacterCount
                     </span>
                 </div>
             </div>
@@ -54,29 +55,35 @@
     </div>
     <!-- Meta -->
     <!-- Content View -->
-    <h1 class="c-tooltip c-tooltip--top" aria-label="Content View grabs all of the Content Html from the page and their nested elements.">
-        Content View  
-
-    </h1>
-    <div class="c-card u-p-medium" id="contentView">
+  
+    <div class="u-text-bold c-card u-p-medium" id="contentView">
         <span class="pull-right c-badge c-badge--success">Words > @Model.OnPage.ContentWordCount</span>
-        <div class="panel-body collapse" id="headersBody">
+        <h1 class="u-text-bold u-border-bottom c-tooltip c-tooltip--top" aria-label="Content View grabs all of the Content Html from the page and their nested elements.">
+            Content View
+
+        </h1>
+
+        <div class="panel-body collapse" id="">
             @foreach (var element in Model.OnPage.HtmlContentElements)
             {
+                <div class=" c-tooltip c-tooltip--right" 
+                     aria-label='@Html.Raw(element)'>
                 @Html.Raw(element)
+                </div>
             }
         </div>
     </div>
     <!-- .Content View-->
 
     <!-- Headers -->
-    <h1>Headers (@Model.OnPage.TotalHeaders)</h1>
+   
     <div class="c-card u-p-medium" id="headers">
+        <h1 class="u-text-bold u-border-bottom">Headers (@Model.OnPage.TotalHeaders)</h1>
         <div class="panel-heading">
             <div class="panel-title">
                 <a href="#headersBody" class="btn pull-right" data-toggle="collapse"><i class="glyphicon glyphicon-minus"></i> / <i class="glyphicon glyphicon-plus"></i></a>
 
-                    
+
             </div>
         </div>
         <div class="panel-body collapse" id="headersBody">
@@ -84,9 +91,9 @@
                 var tags = Model.OnPage.Headers.Select(x => x.HtmlTagName).Distinct().ToList();
                 foreach (var tag in tags)
                 {
-                    <h1>@tag (@Model.OnPage.Headers.Count(x => x.HtmlTagName == tag))</h1>
-                   
-                    
+                    <h1  >@tag (@Model.OnPage.Headers.Count(x => x.HtmlTagName == tag))</h1>
+
+
                     foreach (var header in Model.OnPage.Headers.Where(x => x.HtmlTagName == tag).ToList())
                     {
                         <div class="c-post">
@@ -94,7 +101,7 @@
 
                             <div class="c-post__toolbar">
                                 <span>@header.HtmlTagName</span>
-                                <span class="c-post__time" href="#">Word Count @header.WordCount  
+                                <span class="c-post__time" href="#">Word Count @header.WordCount
                                 </span>
                             </div>
                         </div>
@@ -109,17 +116,16 @@
         
     <!-- Para -->
 
-    <h1>Paragraphs (@Model.OnPage.TotalParas)</h1>
     <div class="c-card u-p-medium" id="paras">
         <span class="pull-right c-badge c-badge--success">Words > @Model.OnPage.Paras.Sum(x => x.WordCount)</span>
-        
+        <h1 class="u-text-bold u-border-bottom">Paragraphs (@Model.OnPage.TotalParas)</h1>
         <div class="panel-body collapse" id="parasBody">
             @foreach (var para in Model.OnPage.Paras)
-            {
-                <p tile="Word Count :  @para.WordCount">
-                    @Html.Raw(para.Text)
-                </p>
-            }
+        {
+            <p tile="Word Count :  @para.WordCount">
+                @Html.Raw(para.Text)
+            </p>
+    }
         </div>
     </div>
     <!-- .Para-->
@@ -130,7 +136,7 @@
 <!-- Nav -->
 <div class="c-graph-card">
     <div class="c-graph-card__content u-flex u-justify-between u-align-items-baseline">
-        <h3 class="c-graph-card__title u-h4">Nav</h3>
+        <h3 class="u-text-bold c-graph-card__title u-h4">Nav</h3>
         <div class="u-text-right">
 
         </div>
@@ -200,7 +206,7 @@
 <!-- Content -->
 <div class="c-graph-card">
     <div class="c-graph-card__content u-flex u-justify-between u-align-items-baseline">
-        <h3 class="c-graph-card__title u-h4">Content</h3>
+        <h3 class="u-text-bold c-graph-card__title u-h4">Content</h3>
         <div class="u-text-right">
 
         </div>
@@ -252,7 +258,7 @@
 <!-- Links -->
 <div class="c-graph-card">
     <div class="c-graph-card__content u-flex u-justify-between u-align-items-baseline">
-        <h3 class="c-graph-card__title u-h4">Links</h3>
+        <h3 class="u-text-bold c-graph-card__title u-h4">Links</h3>
         <div class="u-text-right">
 
         </div>
@@ -318,7 +324,7 @@
 <!-- IMages -->
 <div class="c-graph-card">
     <div class="c-graph-card__content u-flex u-justify-between u-align-items-baseline">
-        <h3 class="c-graph-card__title u-h4">Images</h3>
+        <h3 class="u-text-bold c-graph-card__title u-h4">Images</h3>
         <div class="u-text-right">
 
         </div>
@@ -346,44 +352,43 @@
 <div class="row">
     <div class="col-md-12">
         <!-- Images -->
-        <h1>Images </h1>
-                <table class="c-table" id="images">
-                    <caption class="c-table__title">
-                        Images<small>@Model.OnPage.TotalImages</small>
-                    </caption>
-                    <thead class="c-table__head c-table__head--slim">
-                        <tr class="c-table__row">
-                            <th class="c-table__cell c-table__cell--head">Alt</th>
-                            <th class="c-table__cell c-table__cell--head">Title</th>
-                            <th class="c-table__cell c-table__cell--head">Url</th>
-                            <th class="c-table__cell c-table__cell--head">Thumb</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var img in Model.OnPage.Images)
-                    {
-                        <tr class="c-table__row">
-                            <td class="c-table__cell">@img.Alt</td>
-                            <td class="c-table__cell ">@img.Title</td>
-                            <td class="c-table__cell ">@img.Url</td>
-                            <td class="c-table__cell c-table__cell--img o-media">
-                                <div class="o-media__img u-mr-xsmall">
-                                    <img style="width:56px;" src="@img.Url" />
+        <table class="c-table" id="images">
+            <caption class="c-table__title">
+                Images<small >@Model.OnPage.TotalImages</small>
+            </caption>
+            <thead class="c-table__head c-table__head--slim">
+                <tr class="c-table__row">
+                    <th class="c-table__cell c-table__cell--head">Alt</th>
+                    <th class="c-table__cell c-table__cell--head">Title</th>
+                    <th class="c-table__cell c-table__cell--head">Url</th>
+                    <th class="c-table__cell c-table__cell--head">Thumb</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var img in Model.OnPage.Images)
+            {
+                <tr class="c-table__row">
+                    <td class="c-table__cell">@img.Alt</td>
+                    <td class="c-table__cell ">@img.Title</td>
+                    <td class="c-table__cell ">@img.Url</td>
+                    <td class="c-table__cell c-table__cell--img o-media">
+                        <div class="o-media__img u-mr-xsmall">
+                            <a href="@img.Url" target="_blank">
+                                <img style="width:56px;" src="@img.Url" />
+                            </a> 
 
-                                </div>
+                        </div>
 
-                            </td>
-                        </tr>
-                }
-                    </tbody>
-                </table>
+                    </td>
+                </tr>
+        }
+            </tbody>
+        </table>
         <!-- Images -->
         <!-- Links -->
-        <h1 id="links">Links (@Model.OnPage.TotalLinks)</h1>
- 
-        <table class="c-table">
+        <table class="c-table"  id="links">
             <caption class="c-table__title">
-                Links <small>@Model.OnPage.TotalLinks </small>
+                Links <small class="label label-danger">@Model.OnPage.TotalLinks </small>
             </caption>
             <thead class="c-table__head c-table__head--slim">
             <tr class="c-table__row">
@@ -397,8 +402,12 @@
             @foreach (var link in Model.OnPage.Links)
             {
                 <tr class="c-table__row">
-                    <td class="c-table__cell" style="max-width: 150px; word-wrap: break-word;">@link.AnchorText</td>
-                    <td class="c-table__cell" style="max-width: 150px; word-wrap: break-word;">@link.Href</td>
+                    <td class="c-table__cell"  >@link.AnchorText</td>
+                    <td class="c-table__cell">
+                        <a href="@link.Href" target="_blank">
+                            @link.Href
+                        </a> 
+                    </td>
                     <td class="c-table__cell">@(link.IsInternal ? "Internal" : "External")</td>
                     <td class="c-table__cell">@(link.IsFollow ? "Follow" : "NoFollow")</td>
                 </tr>

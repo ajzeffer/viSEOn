@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Search For A Page That You Want to see with Super viSEOn!";
 }
 
 <div class=" " style="min-height: 600px;">
@@ -13,11 +13,10 @@
                @Html.Partial("_SearchForm")
                 @if (TempData["msg"] != null)
                 {
-                <div class="c-alert c-alert--danger alert">
-                    <i class="c-alert__icon fa fa-times-circle"></i> @TempData["msg"]
-
-                    <button class="c-close" data-dismiss="alert" type="button">×</button>
-                </div>
+                    <div class="c-alert c-alert--danger alert" style="margin-top: 40px;">
+                        <i class="c-alert__icon fa fa-times-circle"></i> @TempData["msg"]
+                        <button class="c-close" data-dismiss="alert" type="button">×</button>
+                    </div>
                 }
             </div>
         </div><!-- /.col-lg-6 -->

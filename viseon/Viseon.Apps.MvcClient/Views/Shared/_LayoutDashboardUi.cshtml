@@ -3,24 +3,31 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>First Touch With App | Dashboard UI Kit</title>
-    <meta name="description" content="Dashboard UI Kit">
+    <title>@ViewBag.Title | viSEOn.io</title>
+    <meta name="description" content="@ViewBag.Description">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600" rel="stylesheet">
 
     <!-- Favicon -->
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-
+    <link rel="shortcut icon" href="@Url.Content("~/favicon.ico")" type="image/x-icon">
+    <!--
+     _____       .___                __________      _____  _____               __    __________                   .___.__       .__               __     .__
+    /  _  \    __| _/____    _____   \____    /_____/ ____\/ ____\___________   \ \   \______   \_______  ____   __| _/|__| ____ |__| ____   _____/  |_   |__| ____   ____
+    /  /_\  \  / __ |\__  \  /     \    /     // __ \   __\\   __\/ __ \_  __ \   \ \   |     ___/\_  __ \/  _ \ / __ | |  |/ ___\|  |/    \_/ __ \   __\  |  |/    \_/ ___\
+    /    |    \/ /_/ | / __ \|  Y Y  \  /     /\  ___/|  |   |  | \  ___/|  | \/   / /   |    |     |  | \(  <_> ) /_/ | |  / /_/  >  |   |  \  ___/|  |    |  |   |  \  \___
+    \____|__  /\____ |(____  /__|_|  / /_______ \___  >__|   |__|  \___  >__|     /_/    |____|     |__|   \____/\____ | |__\___  /|__|___|  /\___  >__| /\ |__|___|  /\___  >
+    \/      \/     \/      \/          \/   \/                 \/                                             \/   /_____/         \/     \/     \/         \/     \/
+    -->
     <!-- Stylesheet -->
     <link rel="stylesheet" href="@Url.Content("~/Content/Themes/DashboardUi/css/main.min.css?v=1.4")">
+    <link href="~/Content/Site.css" rel="stylesheet" />
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-52056929-16"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
 
         gtag('config', 'UA-52056929-16');
@@ -63,7 +70,10 @@
 <div class="container">
     @RenderBody()
 </div>
-
+<footer>
+    <p class="pull-left">&copy; 2017 - @DateTime.Now.Year - ViSEOn.io </p>
+   
+</footer>
     <!-- Main javascsript -->
     <script src="@Url.Content("~/Content/Themes/DashboardUi/js/main.min.js?v=1.4")"></script>
 
