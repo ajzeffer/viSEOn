@@ -101,6 +101,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\PartnerController.cs" />
     <Compile Include="Controllers\ResultControllerTest.cs" />
     <Compile Include="Data\TestData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -116,6 +117,10 @@
     <ProjectReference Include="..\Viseon.Apps.MvcClient\Viseon.Apps.MvcClient.csproj">
       <Project>{BCF58C52-BF11-4434-AD08-A4C7B145EA9F}</Project>
       <Name>Viseon.Apps.MvcClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Viseon.Core.BusinessLayer\Viseon.Core.BusinessLayer.csproj">
+      <Project>{134C9D49-D66C-4079-AE90-E1F693D58678}</Project>
+      <Name>Viseon.Core.BusinessLayer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

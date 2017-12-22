@@ -16,6 +16,10 @@ namespace Viseon.Core.BusinessLayer.StaticData
         public static string ImageElement = "img";
         public static string ParaElement = "p";
 
+        public static List<string> AllowedReferrers = new List<string>()
+        {
+            "anchorprofiler.com"
+        };
         public struct Meta
         {
             public static string NameProp = "name";
