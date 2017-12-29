@@ -19,7 +19,7 @@ namespace Viseon.Apps.MvcClient.Controllers
             {
                 if (target.IsNullOrWhiteSpace()) throw new Exception("Invalid Url Passed In!");
                 var vm = await new ResultViewModelBuilder().BuildResultViewModel(target);
-                if (!vm.OnPage.HasError) return View("~/Result/Overview", vm);
+                if (!vm.OnPage.HasError) return View("Overview", vm);
                 TempData["msg"] = string.Join("", vm.OnPage.Messages);
                 return Redirect("~/");
             }
