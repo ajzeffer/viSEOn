@@ -32,13 +32,13 @@ namespace Viseon.Core.BusinessLayer.Logic.ViseonElements
                     WordCount = 0
                 };
 
-                var text = desc.Attributes[ViseonStaticData.Meta.ContentProp].Value;
+                var text = desc.Attributes[ViseonStaticData.Meta.ContentProp]?.Value;
                 return new ViseonDescriptionModel()
                 {
-                    Text = text,
-                    WordCount = WordCounting.CountWords(text),
+                    Text = text ?? "",
+                    WordCount = text == null ? 0 : WordCounting.CountWords(text),
                     HtmlTagName = ViseonStaticData.MetaDescription, 
-                    CharacterCount = text.Length
+                    CharacterCount = text?.Length ?? 0
                 };
 
             }

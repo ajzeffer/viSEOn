@@ -24,8 +24,9 @@ namespace Viseon.Core.BusinessLayer.Util
         /// </summary>
         public static int CountWords(string s)
         {
-            int c = 0;
-            for (int i = 1; i < s.Length; i++)
+            if (s == null) return 0; 
+            var c = 0;
+            for (var i = 1; i < s.Length; i++)
             {
                 if (char.IsWhiteSpace(s[i - 1]) == true)
                 {
